@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 0 16px;
+    color: #1d1d1f;
+}
+
+h1 {
+    margin-bottom: 24px;
+    font-size: 32px;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+input {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #667eea;
+    background: #fff;
+    color: #667eea;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+
+button:hover {
+    background: #667eea;
+    color: #fff;
+}
+
+#temperature {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+#temperature.cached {
+    color: #888;
+}
+
+.cache-badge {
+    font-size: 13px;
+    color: #999;
+    font-weight: normal;
+}
+
+#networkStatus {
+    font-weight: bold;
+}
+
+.online {
+    color: green;
+}
+
+.offline {
+    color: red;
+}
