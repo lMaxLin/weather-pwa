@@ -52,7 +52,7 @@ async function loadWeather() {
             data.properties.timeseries[0]
                 .data.instant.details.air_temperature;
 
-        await saveWeatherToCache(city, {
+        saveWeatherToCache(city, {
             name,
             temperature
         });
@@ -73,7 +73,7 @@ async function loadWeather() {
 
         console.error('Loading error:', error);
 
-        const cached = await getWeatherFromCache(city);
+        const cached = getWeatherFromCache(city);
 
         if (cached) {
             const time = formatCacheItem(cached.timestamp);
@@ -104,7 +104,7 @@ async function initWeather() {
         return;
     }
 
-    const cached = await getWeatherFromCache(city);
+    const cached = getWeatherFromCache(city);
 
     if (!cached || typeof cached.data?.temperature !== 'number') {
         return;

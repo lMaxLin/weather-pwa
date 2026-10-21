@@ -5,21 +5,20 @@ const weatherStore = localforage.createInstance({
 
 const MAX_CACHE_AGE = 24 * 60 * 60 * 1000;
 
-
 async function saveWeatherToCache(city, data) {
     try {
-        await weatherStore.setItem(city.toLowerCase(), {
+        const key = CACHE_KEY + ctity.toLowerCase();
+        const payload = {
             data,
             timestamp: Date.now()
-        });
+        }
+
     } catch (err) {
         console.error(
-            'Error to save cache:',
-            err
+            'Error to save cache:', err
         );
     }
 }
-
 
 async function getWeatherFromCache(city) {
     if (!city) {
@@ -27,12 +26,13 @@ async function getWeatherFromCache(city) {
     }
 
     try {
-        const cached =
-            await weatherStore.getItem(city.toLowerCase());
+        const key = CACHE_KEY_PREFIX + city.toLowerCase();
+        const raw = localStorage.getItem(key);
 
-        if (!cached) {
-            return null;
+        if (!raw) {
+            return null
         }
+        const cached = JSON.parse(raw);
 
         const age = Date.now() - cached.timestamp;
 
@@ -47,7 +47,7 @@ async function getWeatherFromCache(city) {
 
     } catch (err) {
         console.error(
-            'Error to read cache:',
+            'Error read cache:',
             err
         );
         return null;
