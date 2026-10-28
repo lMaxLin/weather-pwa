@@ -1,18 +1,14 @@
-const weatherStore = localforage.createInstance({
-    name: 'weather-pwa',
-    storeName: 'weather_cache'
-});
-
 const MAX_CACHE_AGE = 24 * 60 * 60 * 1000;
+const CACHE_KEY_PREFIX = 'weather_';
 
-async function saveWeatherToCache(city, data) {
+function saveWeatherToCache(city, data) {
     try {
-        const key = CACHE_KEY + ctity.toLowerCase();
+        const key = CACHE_KEY_PREFIX + city.toLowerCase();
         const payload = {
             data,
             timestamp: Date.now()
         }
-
+        localStorage.setItem(key, JSON.stringify(payload));
     } catch (err) {
         console.error(
             'Error to save cache:', err
@@ -20,7 +16,7 @@ async function saveWeatherToCache(city, data) {
     }
 }
 
-async function getWeatherFromCache(city) {
+function getWeatherFromCache(city) {
     if (!city) {
         return null;
     }
